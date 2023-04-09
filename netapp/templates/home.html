@@ -21,6 +21,13 @@
 
 
     {% endif %} -->
+    {% if nerecords %}
+        {% for record in nerecords %}
+            {{record}}<br/>
+
+        {% endfor %}
+
+    {% endif %}
 
 {% endblock %}
 

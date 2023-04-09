@@ -1,10 +1,13 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
+from .models import Nerecords, PErecords
 
 
 # Create your views here.
 def home(request):
+    disp_nerecords = Nerecords.objects.all()
+
     if request.method == 'POST':
         username = request.POST['username']
         password = request.POST['password']
@@ -18,7 +21,7 @@ def home(request):
             return redirect('login')
     else:
         if request.user.is_authenticated:
-            return render(request,'home.html',{})
+            return render(request,'home.html',{'nerecords':disp_nerecords})
         else:
             return redirect('login')
 # def userAuth(request):
@@ -42,3 +45,10 @@ def userLogout(request):
     logout(request)
     messages.success(request, "Logged out...")
     return redirect('home')
+def pes(request):
+    if request.user.is_authenticated:
+        disp_perecords = PErecords.objects.all()
+        return render(request,'pes.html',{'perecords':disp_perecords})
+    else:
+        return redirect('login')
+
