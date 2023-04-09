@@ -6,24 +6,12 @@ from .models import Nerecords, PErecords
 
 # Create your views here.
 def home(request):
-    disp_nerecords = Nerecords.objects.all()
-
-    if request.method == 'POST':
-        username = request.POST['username']
-        password = request.POST['password']
-        user = authenticate(request, username=username, password=password)
-        if user is not None:
-            login(request,user)
-            messages.success(request,"Login successful")
-            return redirect('home')
-        else:
-            messages.success(request, "Login Failed!,Invalid username or password")
-            return redirect('login')
+   
+    if request.user.is_authenticated:
+        disp_nerecords = Nerecords.objects.all()
+        return render(request,'home.html',{'nerecords':disp_nerecords})
     else:
-        if request.user.is_authenticated:
-            return render(request,'home.html',{'nerecords':disp_nerecords})
-        else:
-            return redirect('login')
+        return redirect('login')
 # def userAuth(request):
 #     #  check to see if user has supplied correct cerentials
 #         if request.method == 'POST':
@@ -39,7 +27,19 @@ def home(request):
 #                return redirect('login')
           
 def userLogin(request):
-    return render(request,'login.html',{})
+    if request.method == 'POST':
+        username = request.POST['username']
+        password = request.POST['password']
+        user = authenticate(request, username=username, password=password)
+        if user is not None:
+            login(request,user)
+            messages.success(request,"Login successful")
+            return redirect('home')
+        else:
+            messages.success(request, "Login Failed!,Invalid username or password")
+            return redirect('login')
+    else:
+        return render(request,'login.html',{})
 
 def userLogout(request):
     logout(request)
