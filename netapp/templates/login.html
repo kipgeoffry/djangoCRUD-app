@@ -6,8 +6,7 @@
     <div class="col-4 bg-body-secondary mt-5 ">
         <h3 class="pt-3 text-center">Log in</h3>
         <form method="POST" action="{% url 'home' %}"> 
-            {% csrf_token %}
-            <form>
+          {% csrf_token %}
             <div class="mb-2">
               <label for="username" class="form-label">Username</label>
               <input type="text" class="form-control" id="username" name="username" placeholder="username" required>
@@ -18,8 +17,7 @@
             </div >
             <div class="text-center">
             <button type="submit" class="btn btn-secondary mb-3">Submit</button>
-            </div>
-          </form>
+            </div>        
           </form>
     </div>
     <div class="col-4"></div>
