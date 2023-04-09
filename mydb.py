@@ -1,4 +1,3 @@
-#create the application db nemanager 
 import  mysql.connector
 mydb = mysql.connector.connect(
   host="192.168.5.43",
