@@ -13,7 +13,9 @@ urlpatterns = [
     path('pe/',views.pe,name='pe'),
     path('nerecord/<int:pk>',views.ne_record,name='nerecord'),
     #path('perecord/<int:pk>',views.pe_record,name='perecord'),
-    path('delete_ne/<int:pk>',views.delete_nerecord,name='delete_ne')
+    path('delete_ne/<int:pk>',views.delete_nerecord,name='delete_ne'),
+    path('add_ne',views.add_ne,name='add_ne'),
+    
 
 ]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 

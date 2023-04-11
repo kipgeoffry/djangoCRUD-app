@@ -1,7 +1,8 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
-from .models import Nerecords, PErecords
+from netapp.models import Nerecords, PErecords
+from netapp.forms import AddNeForm
 
 
 # Create your views here.
@@ -70,6 +71,19 @@ def delete_nerecord(request,pk):
         delete_ne.delete()
         messages.success(request, "Record Deleted Successfully")
         return redirect('home')
+    else:
+        return redirect('login')
+
+def add_ne(request):
+    addNeForm = AddNeForm(request.POST or None)
+    if request.user.is_authenticated:
+        if request.method == "POST":
+            if addNeForm.is_valid():
+                add_ne_details = addNeForm.save()
+                messages.success(request, "NE added Successfully")
+                return redirect('home')
+            # messages.success(request, "Form Invalid")              
+        return render(request,'add_ne.html',{"form":addNeForm})
     else:
         return redirect('login')
 
