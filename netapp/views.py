@@ -79,17 +79,26 @@ def add_ne(request):
     if request.user.is_authenticated:
         if request.method == "POST":
             if addNeForm.is_valid():
-                add_ne_details = addNeForm.save()
+                # add_ne_details = addNeForm.save()
+                addNeForm.save()
                 messages.success(request, "NE added Successfully")
                 return redirect('home')
-            # messages.success(request, "Form Invalid")              
+            messages.success(request, "Form Invalid")              
         return render(request,'add_ne.html',{"form":addNeForm})
     else:
         return redirect('login')
 
+def update_nerecord(request,pk):
+    current_record = Nerecords.objects.get(id=pk)
+    updateform = AddNeForm(request.POST or None,instance=current_record)
+    if request.user.is_authenticated:
+        # when user is POSTING,
+        if updateform.is_valid():
+            updateform.save()
+            messages.success(request, "NE Updated Successfully")
+            return redirect('home')
+        #IF user is not posting i.e when None,display the form
+        return render(request,'update_ne.html',{"upform":updateform})
 
-
-
-   
-
-
+    else:
+        return redirect('login')

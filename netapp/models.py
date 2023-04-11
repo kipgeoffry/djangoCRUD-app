@@ -25,7 +25,6 @@ class PErecords(models.Model):
     pe_interface1 = models.CharField(max_length=20)
     pe_interface2 = models.CharField(max_length=20,null=True)
     pe_interface3 = models.CharField(max_length=20,null=True)
-    pe_interface4 = models.CharField(max_length=20,null=True)
 
     def __str__(self):
         return f" {self.pe_model} {self.pe_name} {self.pe_ip1} {self.pe_ip2}"
