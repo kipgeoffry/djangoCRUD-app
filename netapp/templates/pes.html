@@ -26,6 +26,9 @@
                   <li class="nav-item">
                     <a class="nav-link" href="{% url 'logout' %}">Log out</a>
                   </li> 
+                  <li class="nav-item">
+                    <a class="nav-link" href="{% url 'add_pe' %}">Add PE</a>
+                  </li>
                 </ul>
               </div>
             </div>
@@ -40,6 +43,7 @@
                 {% include 'search.html'%}
             </div>
         </div>
+        {% include 'messages.html'%}
         <div class="row pt-3">
             <div class="col-sm-12">
                 <!-- content to be added here -->
@@ -54,7 +58,8 @@
                         <th scope="col">Interface 1</th>
                         <th scope="col">Interface 2</th>
                         <th scope="col">Interface 3</th>
-                        <th scope="col">Interface 4</th>
+                        <th scope="col">Actions</th>
+
                       </tr>
                     </thead>
                     <tbody>
@@ -69,7 +74,10 @@
                                     <td>{{record.pe_interface1}}</td>
                                     <td>{{record.pe_interface2}}</td>
                                     <td>{{record.pe_interface3}}</td>
-                                    <td>{{record.pe_inteface4}}</td>
+                                    <td>
+                                      <a href="{% url 'update_pe' record.id %}" class="edit" title="Edit" data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a>
+                                      <a href="{% url 'delete_pe' record.id %}" class="delete" title="Delete" data-toggle="tooltip"><i class="material-icons">&#xE872;</i></a>
+                                    </td>
                             {% endfor %}
                             {% endif %}
                                 </tr>
