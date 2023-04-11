@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{%block content %}
+
+<div class="row">
+    <div class="col-sm-8 text-center ">
+        <h2 class="pt-3">IPRAN NEs Management</h2>
+    </div>
+    <div class="col-sm-4">
+        {% include 'search.html'%}
+    </div>
+</div>
+<!-- content to be added here -->
+<div class="container">
+    <div class="justify-content-center">
+        <div class="card">
+            <h5 class="card-header">{{nedetails.ne_name}}</h5>
+            <div class="card-body">
+                <p class="card-text"><b>IP:</b> {{nedetails.ne_ip}}</p>
+                <p class="card-text"><b>Switch Type:</b> {{nedetails.ne_type}}</p>
+                <p class="card-text"><b>Aggregating PE:</b> {{nedetails.aggreate_pe}}</p>
+                <p class="card-text"><b>Internet Carrier Vlan:</b> {{nedetails.carrier_vlan_internet}}</p>
+                <p class="card-text"><b>MPLS Carrier Vlan:</b> {{nedetails.carrier_vlan_mpls}}</p>
+                <p class="card-text"><b>PE interface:</b> {{nedetails.pe_interface}}</p>
+                <p class="card-text"><b>Interfaces:</b> {{nedetails.device_interfaces}}</p>
+                <p class="card-text"><b>Comments:</b> {{nedetails.comments}}</p>
+            </div>
+        </div>
+        <div class="pt-2">
+            <a href="{% url 'home' %}" class="btn btn-secondary">Back</a>
+            <a href="#" class="btn btn-secondary">Edit</a>
+            <a href="{% url 'delete_ne' nedetails.id %}" class="btn btn-secondary btn-danger">Delete</a>
+        </div>
+
+    </div>
+</div>
+
+{% endblock %}

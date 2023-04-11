@@ -5,8 +5,7 @@ from .models import Nerecords, PErecords
 
 
 # Create your views here.
-def home(request):
-   
+def home(request): 
     if request.user.is_authenticated:
         disp_nerecords = Nerecords.objects.all()
         return render(request,'home.html',{'nerecords':disp_nerecords})
@@ -51,4 +50,32 @@ def pes(request):
         return render(request,'pes.html',{'perecords':disp_perecords})
     else:
         return redirect('login')
+def ne_record(request,pk): 
+    if request.user.is_authenticated:
+        #Lookup for record on DB pass record primary key and assign details to variable ne_details
+        ne_details = Nerecords.objects.get(id=pk)
+        #render the record details on html document,passing details as nedetails
+        return render(request,'nedetails.html',{'nedetails':ne_details})
+    else:
+        return redirect('login')
+    
+def pe(request):
+    if request.user.is_authenticated:
+        return render(request,'pe.html',{})
+    else:
+        return redirect('login')
+def delete_nerecord(request,pk):
+    if request.user.is_authenticated:
+        delete_ne = Nerecords.objects.get(id=pk)
+        delete_ne.delete()
+        messages.success(request, "Record Deleted Successfully")
+        return redirect('home')
+    else:
+        return redirect('login')
+
+
+
+
+   
+
 
